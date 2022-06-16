@@ -2,7 +2,13 @@ buildscript {
     ext {
         compose_version = '1.2.0-alpha05'
         wear_compose_version = '1.0.0-alpha18'
+        hilt_version = "2.40.1"
     }
+
+    dependencies {
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$hilt_version")
+    }
+
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id 'com.android.application' version '7.4.0-alpha02' apply false
