@@ -14,14 +14,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.*
 import com.example.rememberyouclosed.R
+import com.example.rememberyouclosed.domain.mappers.convertToString
+import com.example.rememberyouclosed.domain.model.Lock
+import com.example.rememberyouclosed.domain.model.LockStatus
+import com.example.rememberyouclosed.presentation.theme.Grey500
 import com.example.rememberyouclosed.presentation.theme.RememberYouClosedTheme
+import com.example.rememberyouclosed.presentation.util.UiEvent
+import kotlinx.coroutines.flow.collect
 
-@OptIn(ExperimentalWearMaterialApi::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel(),
+    onNavigate: (UiEvent.Navigate) -> Unit
+) {
 
     val locks = viewModel.locks.collectAsState(initial = listOf()).value
 
+    LaunchedEffect(key1 = true, block = {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Navigate -> {
+                    onNavigate(event)
+                }
+                else -> Unit
+            }
+        }
+    })
+
+    HomeContent(
+        locks = locks,
+        onEvent = viewModel::onEvent
+    )
+}
+
+@OptIn(ExperimentalWearMaterialApi::class)
+@Composable
+private fun HomeContent(
+    locks: List<Lock>,
+    onEvent: (HomeScreenEvents) -> Unit
+) {
     Scaffold(
         timeText = {
             TimeText()
@@ -32,9 +63,6 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             anchorType = ScalingLazyListAnchorType.ItemCenter,
             autoCentering = true,
             content = {
-                items(locks) {
-                    Text(text = it.title!!)
-                }
                 item {
                     Chip(
                         label = { Text(text = stringResource(id = R.string.add_new_lock)) },
@@ -47,7 +75,29 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                         colors = ChipDefaults.chipColors(
                             backgroundColor = Color.Transparent
                         ),
-                        onClick = { /*TODO*/ }
+                        onClick = { onEvent(HomeScreenEvents.OnAddNewLockClick) }
+                    )
+                }
+                items(locks) { lock ->
+                    Chip(
+                        label = { Text(text = lock.title!!) },
+                        secondaryLabel = { Text(text = lock.status?.convertToString()!!) },
+                        icon = {
+                            lock.icon?.let { icon ->
+                                Icon(
+                                    painter = painterResource(id = icon),
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        colors = ChipDefaults.chipColors(
+                            backgroundColor = Grey500
+                        ),
+                        onClick = {
+                            lock.id?.let { id ->
+                                onEvent(HomeScreenEvents.OnLockClick(id))
+                            }
+                        }
                     )
                 }
             }
@@ -59,6 +109,20 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 @Composable
 fun HomePreview() {
     RememberYouClosedTheme {
-        HomeScreen()
+        HomeContent(
+            locks = listOf(
+                Lock(
+                    title = "Home",
+                    status = LockStatus.LOCKED,
+                    icon = R.drawable.ic_round_home_24
+                ),
+                Lock(
+                    title = "Car",
+                    status = LockStatus.LOCKED,
+                    icon = R.drawable.ic_round_directions_car_24
+                )
+            ),
+            onEvent = {}
+        )
     }
 }

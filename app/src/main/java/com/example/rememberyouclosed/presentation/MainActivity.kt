@@ -34,6 +34,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp() {
     RememberYouClosedTheme {
-        HomeScreen()
+        Navigation()
     }
 }
