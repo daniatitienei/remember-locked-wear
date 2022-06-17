@@ -12,6 +12,8 @@ class LockRepositoryImpl(
 ) : LockRepository {
     override fun getAllLocks(): Flow<List<Lock>> = dao.getAllLocks()
 
+    override suspend fun getLockById(id: Long) = dao.getLockById(id)
+
     override suspend fun insertLock(lockCategory: LockCategory) {
         val lock = Lock(
             title = lockCategory.title,
@@ -19,5 +21,9 @@ class LockRepositoryImpl(
             status = LockStatus.UNLOCKED
         )
         dao.insertLock(lock)
+    }
+
+    override suspend fun updateLock(lock: Lock) {
+        dao.updateLock(lock)
     }
 }

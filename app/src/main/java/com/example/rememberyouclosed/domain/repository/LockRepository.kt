@@ -7,5 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface LockRepository {
     fun getAllLocks(): Flow<List<Lock>>
 
+    suspend fun getLockById(id: Long): Lock
+
     suspend fun insertLock(lockCategory: LockCategory)
+
+    suspend fun updateLock(lock: Lock)
 }

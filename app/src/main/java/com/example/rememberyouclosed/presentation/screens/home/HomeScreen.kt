@@ -1,7 +1,6 @@
 package com.example.rememberyouclosed.presentation.screens.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,13 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.*
 import com.example.rememberyouclosed.R
-import com.example.rememberyouclosed.domain.mappers.convertToString
+import com.example.rememberyouclosed.domain.mappers.asString
 import com.example.rememberyouclosed.domain.model.Lock
 import com.example.rememberyouclosed.domain.model.LockStatus
 import com.example.rememberyouclosed.presentation.theme.Grey500
 import com.example.rememberyouclosed.presentation.theme.RememberYouClosedTheme
 import com.example.rememberyouclosed.presentation.util.UiEvent
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun HomeScreen(
@@ -81,7 +79,7 @@ private fun HomeContent(
                 items(locks) { lock ->
                     Chip(
                         label = { Text(text = lock.title!!) },
-                        secondaryLabel = { Text(text = lock.status?.convertToString()!!) },
+                        secondaryLabel = { Text(text = lock.status?.asString()!!) },
                         icon = {
                             lock.icon?.let { icon ->
                                 Icon(
