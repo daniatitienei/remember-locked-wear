@@ -4,7 +4,6 @@ import com.example.rememberyouclosed.R
 import com.example.rememberyouclosed.domain.model.LockCategory
 
 object Constants {
-
     val lockCategories = listOf(
         LockCategory(
             title = "Home",
@@ -14,5 +13,18 @@ object Constants {
             title = "Car",
             icon = R.drawable.ic_round_directions_car_24
         ),
+        LockCategory(
+            title = "Lights",
+            icon = R.drawable.lightbulb
+        ),
+        LockCategory(
+            title = "Gas",
+            icon = R.drawable.gas_meter
+
+        ),
+        LockCategory(
+            title = "Water",
+            icon = R.drawable.water_drop
+        )
     )
 }
