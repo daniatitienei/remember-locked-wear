@@ -1,4 +1,4 @@
-package com.example.rememberyouclosed.data.data_source
+package com.example.rememberyouclosed.data.data_source.lock_database
 
 import androidx.room.Dao
 import androidx.room.Insert

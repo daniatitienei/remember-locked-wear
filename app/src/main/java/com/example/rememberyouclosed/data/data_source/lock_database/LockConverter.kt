@@ -1,4 +1,4 @@
-package com.example.rememberyouclosed.data.data_source
+package com.example.rememberyouclosed.data.data_source.lock_database
 
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toLowerCase

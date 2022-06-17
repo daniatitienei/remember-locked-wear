@@ -2,8 +2,7 @@ package com.example.rememberyouclosed.data.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.rememberyouclosed.data.data_source.LockConverter
-import com.example.rememberyouclosed.data.data_source.LockDatabase
+import com.example.rememberyouclosed.data.data_source.lock_database.LockDatabase
 import com.example.rememberyouclosed.data.repository.LockRepositoryImpl
 import com.example.rememberyouclosed.domain.repository.LockRepository
 import dagger.Module
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object DatabaseModule {
 
     @Provides
     @Singleton
@@ -25,8 +24,4 @@ object AppModule {
             LockDatabase.DATABASE_NAME
         )
         .build()
-
-    @Provides
-    @Singleton
-    fun provideLockRepository(db: LockDatabase): LockRepository = LockRepositoryImpl(db.lockDao)
 }

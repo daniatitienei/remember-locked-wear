@@ -1,10 +1,7 @@
 package com.example.rememberyouclosed.domain.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.rememberyouclosed.data.data_source.LockConverter
 
 @Entity
 data class Lock(

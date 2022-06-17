@@ -13,6 +13,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import com.example.rememberyouclosed.presentation.screens.add_new_lock.AddNewLockScreen
 import com.example.rememberyouclosed.presentation.screens.home.HomeScreen
 import com.example.rememberyouclosed.presentation.util.Routes
 
@@ -34,14 +35,11 @@ fun Navigation() {
             )
         }
         composable(Routes.AddNewLockScreen) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(align = Alignment.Center)
-                    .background(Color.Black)
-            ) {
-                Text(text = "Add new lock screen")
-            }
+            AddNewLockScreen(
+                onPopBackStack = {
+                    swipeDismissibleNavController.popBackStack()
+                }
+            )
         }
         composable(Routes.UpdateLockStatusScreen) {
             Box(
