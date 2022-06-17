@@ -15,6 +15,7 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.example.rememberyouclosed.presentation.screens.add_new_lock.AddNewLockScreen
 import com.example.rememberyouclosed.presentation.screens.home.HomeScreen
+import com.example.rememberyouclosed.presentation.screens.update_lock_status.UpdateLockStatusScreen
 import com.example.rememberyouclosed.presentation.util.Routes
 
 @OptIn(ExperimentalWearMaterialApi::class)
@@ -42,14 +43,7 @@ fun Navigation() {
             )
         }
         composable(Routes.UpdateLockStatusScreen) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(align = Alignment.Center)
-                    .background(Color.Black)
-            ) {
-                Text(text = "Update lock status screen")
-            }
+            UpdateLockStatusScreen()
         }
     }
 }

@@ -7,4 +7,6 @@
     <string name="add_new_lock">Add new lock</string>
     <string name="home">Home</string>
     <string name="car">Car</string>
+    <string name="locked">Locked</string>
+    <string name="unlocked">Unlocked</string>
 </resources>
