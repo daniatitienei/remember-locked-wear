@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object DatabaseModule {
 
     @Provides
     @Singleton
@@ -24,8 +24,4 @@ object AppModule {
             LockDatabase.DATABASE_NAME
         )
         .build()
-
-    @Provides
-    @Singleton
-    fun provideLockRepository(db: LockDatabase): LockRepository = LockRepositoryImpl(db.lockDao)
 }

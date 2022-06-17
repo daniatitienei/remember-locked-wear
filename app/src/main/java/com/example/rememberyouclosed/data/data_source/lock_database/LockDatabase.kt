@@ -1,4 +1,4 @@
-package com.example.rememberyouclosed.data.data_source
+package com.example.rememberyouclosed.data.data_source.lock_database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -11,7 +11,7 @@ import com.example.rememberyouclosed.domain.model.Lock
 @TypeConverters(LockConverter::class)
 abstract class LockDatabase : RoomDatabase() {
 
-    abstract val lockDao: LockDao
+    abstract val dao: LockDao
 
     companion object {
         const val DATABASE_NAME = "lock-database"

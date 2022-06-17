@@ -1,3 +1,9 @@
 package com.example.rememberyouclosed.domain.model
 
-data class LockCategory()
+import androidx.room.Entity
+
+@Entity
+data class LockCategory(
+    val title: String,
+    val icon: Int
+)
